@@ -17807,6 +17807,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_tabs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/tabs */ "./src/js/modules/tabs.js");
 /* harmony import */ var _modules_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/forms */ "./src/js/modules/forms.js");
 /* harmony import */ var _modules_changeModalState__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/changeModalState */ "./src/js/modules/changeModalState.js");
+/* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/timer */ "./src/js/modules/timer.js");
+
 
 
 
@@ -17830,6 +17832,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.decoration_slider', '.no_click', '.decoration_content > div > div', 'after_click');
   Object(_modules_tabs__WEBPACK_IMPORTED_MODULE_2__["default"])('.balcon_icons', '.balcon_icons_img', '.big_img > img', 'do_image_more', 'inline');
   Object(_modules_forms__WEBPACK_IMPORTED_MODULE_3__["default"])(modalState);
+  Object(_modules_timer__WEBPACK_IMPORTED_MODULE_5__["default"])('2022-06-25');
 });
 
 /***/ }),
@@ -18168,6 +18171,71 @@ function tabs(headerSelector, tabSelector, contentSelector, activeClass) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (tabs);
+
+/***/ }),
+
+/***/ "./src/js/modules/timer.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/timer.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function zero(num) {
+  if (num < 10 && num >= 0) {
+    return '0' + num;
+  } else {
+    return num;
+  }
+}
+
+function timer(deadline) {
+  var days = document.querySelector('#days'),
+      hours = document.querySelector('#hours'),
+      minutes = document.querySelector('#minutes'),
+      seconds = document.querySelector('#seconds');
+
+  function timeLeft(deadline) {
+    var dateLeft = new Date(deadline) - new Date();
+
+    if (dateLeft < 0) {
+      dateLeft = 0;
+    }
+
+    return {
+      days: Math.floor(dateLeft / 1000 / 60 / 60 / 24),
+      hours: Math.floor(dateLeft / 1000 / 60 / 60 % 24),
+      minutes: Math.floor(dateLeft / 1000 / 60 % 60),
+      seconds: Math.floor(dateLeft / 1000 % 60),
+      total: dateLeft
+    };
+  }
+
+  days.innerHTML = zero(timeLeft(deadline).days);
+  hours.innerHTML = zero(timeLeft(deadline).hours);
+  minutes.innerHTML = zero(timeLeft(deadline).minutes);
+  seconds.innerHTML = zero(timeLeft(deadline).seconds); // timer(days, hours, minutes, seconds, deadline);
+
+  updateTime.bind(null, days, hours, minutes, seconds, deadline);
+  var interval = setInterval(updateTime.bind(null, days, hours, minutes, seconds, deadline), 1000);
+
+  function updateTime(days, hours, minutes, seconds, deadline) {
+    var time = timeLeft(deadline);
+
+    if (time.total < 0) {
+      clearInterval(interval);
+    }
+
+    days.innerHTML = zero(time.days);
+    hours.innerHTML = zero(time.hours);
+    minutes.innerHTML = zero(time.minutes);
+    seconds.innerHTML = zero(time.seconds);
+  }
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (timer);
 
 /***/ }),
 
