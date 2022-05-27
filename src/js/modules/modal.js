@@ -1,7 +1,21 @@
 function openModal(modalSelector, openSelector, modalTimer, closeClickOverlay = true) {
     const modal = document.querySelector(modalSelector);
     const btn = document.querySelectorAll(openSelector);
-    // const windows = document.querySelectorAll('[data-modal]');
+    const scroll = calcScroll();
+   function calcScroll() {
+        let div = document.createElement('div');
+
+        div.style.width = '50px';
+        div.style.height = '50px';
+        div.style.overflowY = 'scroll';
+        div.style.visibility = 'hidden';
+
+        document.body.appendChild(div);
+        let scrollWidth = div.offsetWidth - div.clientWidth;
+        div.remove();
+
+        return scrollWidth;
+    }
     btn.forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
@@ -12,6 +26,7 @@ function openModal(modalSelector, openSelector, modalTimer, closeClickOverlay = 
                 if(width.value && height.value) {
                     modal.style.display = 'block';
                     document.body.style.overflow = 'hidden';
+                    document.body.style.marginRight = `${scroll}px`;
                 } 
                     if(!width.value) {
                         width.style.border = '1px solid red';
@@ -30,6 +45,7 @@ function openModal(modalSelector, openSelector, modalTimer, closeClickOverlay = 
                         console.log(item.value);
                         modal.style.display = 'block';
                         document.body.style.overflow = 'hidden';
+                        document.body.style.marginRight = `${scroll}px`;
                         check = false; 
                     } 
                 });
@@ -47,6 +63,7 @@ function openModal(modalSelector, openSelector, modalTimer, closeClickOverlay = 
              else {
                 modal.style.display = 'block';
                 document.body.style.overflow = 'hidden';
+                document.body.style.marginRight = `${scroll}px`;
             }
             
         });
@@ -56,6 +73,7 @@ function openModal(modalSelector, openSelector, modalTimer, closeClickOverlay = 
         (e.target.classList.contains(modalSelector.replace(/\./, ''))) && closeClickOverlay)) {
             modal.style.display = 'none';
             document.body.style.overflow = 'auto';
+            document.body.style.marginRight = `0`;
             // windows.forEach(item => {
             //     item.style.display = 'none';
             // });

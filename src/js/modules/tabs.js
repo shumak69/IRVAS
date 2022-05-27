@@ -6,7 +6,7 @@ function tabs(headerSelector, tabSelector, contentSelector, activeClass, display
     function hideTabContent() {
         content.forEach((item, i) => {
             item.style.display = 'none';
-            content[i].classList.add('animate__animated', 'animate__slideInUp');
+            // content[i].classList.add('animate__animated', 'animate__slideInUp');
         });
         tab.forEach((item) => {
             item.classList.remove(activeClass);

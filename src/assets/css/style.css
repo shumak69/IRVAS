@@ -18,6 +18,18 @@ body {
   color: red;
 }
 
+.faded {
+  animation: faded 1s;
+}
+
+@keyframes faded {
+  from {
+    opacity: 0.5;
+  }to {
+    opacity: 1;
+  }
+}
+
 a:hover {
   text-decoration: none;
 }
@@ -1112,12 +1124,17 @@ textarea:focus {
   .main {
     background-position: -30rem 0;
   }
+  
 }
 
 @media (max-width: 1199px) {
   .header_btn {
     padding: 1rem 1rem 1rem 5rem;
     font-size: 1.2rem;
+    
+  }
+  .popup img {
+    width: 60%;
   }
 
   .header .working_hours_img img {
@@ -1478,6 +1495,9 @@ textarea:focus {
 }
 
 @media (max-width: 530px) {
+  .popup img {
+    width: 85%;
+  }
   .form {
     margin-top: 2rem;
     padding: 1.5rem 2rem;
@@ -1830,3 +1850,8 @@ textarea:focus {
     animation: none !important;
   }
 }
+
+.works img {
+  user-select: none;
+}
+
